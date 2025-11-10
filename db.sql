@@ -1,35 +1,25 @@
 -- --------------------------------------------------------
--- Table structure for table `teachers`
+-- Table structure for table `enrollments`
 -- --------------------------------------------------------
 
-CREATE TABLE `teachers` (
+CREATE TABLE `enrollments` (
   `id` int NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `experience` varchar(50) NOT NULL,
-  `education` varchar(150) NOT NULL
+  `user_id` int NOT NULL,
+  `course_id` int NOT NULL,
+  `payment_proof` varchar(255) DEFAULT NULL,
+  `status` enum('menunggu konfirmasi','aktif','selesai','ditolak') DEFAULT 'menunggu konfirmasi',
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
--- Dumping data for table `teachers`
--- --------------------------------------------------------
-
-INSERT INTO `teachers` (`id`, `name`, `title`, `experience`, `education`) VALUES
-(1, 'James Pratama', 'English Language Instructor', '6+ Tahun Mengajar', 'Lulusan Universitas Melbourne'),
-(2, 'Sarah Wijaya', 'TOEFL & IELTS Specialist', '8 Tahun Mengajar', 'Lulusan Universitas Indonesia'),
-(3, 'Michael Santoso', 'Academic Writing Coach', '5 Tahun Mengajar', 'Lulusan Universitas Gadjah Mada'),
-(4, 'Lina Rahmah', 'Conversational English Tutor', '7 Tahun Mengajar', 'Lulusan Universitas Negeri Malang');
-
--- --------------------------------------------------------
--- Indexes for table `teachers`
--- --------------------------------------------------------
-
-ALTER TABLE `teachers`
+-- Indexes
+ALTER TABLE `enrollments`
   ADD PRIMARY KEY (`id`);
 
--- --------------------------------------------------------
--- AUTO_INCREMENT for table `teachers`
--- --------------------------------------------------------
+-- Auto increment
+ALTER TABLE `enrollments`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `teachers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+-- Foreign keys (optional, bisa diaktifkan nanti)
+-- ALTER TABLE `enrollments`
+--   ADD CONSTRAINT fk_enroll_user FOREIGN KEY (user_id) REFERENCES users(id),
+--   ADD CONSTRAINT fk_enroll_course FOREIGN KEY (course_id) REFERENCES courses(id);

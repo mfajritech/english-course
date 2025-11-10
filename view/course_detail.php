@@ -124,7 +124,7 @@ else{
 
           <div class="mt-4">
             <h4 class="fw-bold text-primary mb-3">Rp <?=$course['price']?></h4>
-            <a href="#" class="btn btn-enroll btn-lg px-4"><i class="bi bi-cart-check me-2"></i>Daftar Sekarang</a>
+            <a href="course_enroll.php?id=<?php echo $course['id'] ?>" class="btn btn-enroll btn-lg px-4"><i class="bi bi-cart-check me-2"></i>Daftar Sekarang</a>
           </div>
         </div>
       </div>
@@ -140,9 +140,7 @@ else{
             <ul class="list-group list-group-flush">
 
                 <?php foreach($lessons as $lesson){ ?>
-
-                     <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i><?=$lesson?></li>
-
+                  <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i><?=$lesson?></li>
                 <?php } ?>
 
             </ul>
