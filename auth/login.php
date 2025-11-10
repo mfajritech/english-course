@@ -61,6 +61,12 @@ $conn->close();
       <h2 class="fw-bold text-center mb-3">Login</h2>
       <p class="text-center text-muted mb-4" style="font-size: 14px;">Silakan masuk untuk melanjutkan</p>
 
+   <?php 
+        if($message != ""){
+            echo "<p class='text-danger'>*{$message}</p>";
+        }
+    ?>
+
       <form action="" method="POST">
         <div class="form-floating mb-3">
           <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
