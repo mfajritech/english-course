@@ -423,9 +423,76 @@ if ($result && $result->num_rows > 0) {
 
         if (type === 'kursus') {
             form.innerHTML = `
-          <label>Nama Kursus</label><input id="nama" class="form-control mb-2" required>
-          <label>Durasi</label><input id="durasi" class="form-control mb-2" required>
-          <label>Tutor</label><input id="tutor" class="form-control mb-3" required>
+           <div class="mb-3">
+          <label for="kursusId" class="form-label">ID Kursus</label>
+          <input type="text" class="form-control" id="kursusId" placeholder="Masukkan ID Kursus">
+        </div>
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label">Judul Kursus</label>
+          <input type="text" class="form-control" id="title" placeholder="Masukkan Judul Kursus">
+        </div>
+
+        <!-- Slogan -->
+        <div class="mb-3">
+          <label for="slogan" class="form-label">Slogan</label>
+          <input type="text" class="form-control" id="slogan" placeholder="Masukkan Slogan">
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Deskripsi</label>
+          <textarea class="form-control" id="description" rows="3" placeholder="Deskripsi Kursus"></textarea>
+        </div>
+
+        <!-- Duration -->
+        <div class="mb-3">
+          <label for="duration" class="form-label">Durasi (jam/minggu)</label>
+          <input type="text" class="form-control" id="duration" placeholder="Contoh: 20 jam">
+        </div>
+
+        <!-- Capacity -->
+        <div class="mb-3">
+          <label for="capacity" class="form-label">Kapasitas</label>
+          <input type="number" class="form-control" id="capacity" placeholder="Jumlah maksimal peserta">
+        </div>
+
+        <!-- Mode -->
+        <div class="mb-3">
+          <label for="mode" class="form-label">Mode</label>
+          <select class="form-select" id="mode">
+            <option selected>Pilih Mode</option>
+            <option value="offline">Offline</option>
+            <option value="online">Online</option>
+            <option value="hybrid">Hybrid</option>
+          </select>
+        </div>
+
+        <!-- Schedule -->
+        <div class="mb-3">
+          <label for="schedule" class="form-label">Jadwal</label>
+          <input type="text" class="form-control" id="schedule" placeholder="Contoh: Senin & Rabu 14:00-16:00">
+        </div>
+
+        <!-- Teacher ID -->
+        <div class="mb-3">
+          <label for="teacherId" class="form-label">ID Pengajar</label>
+          <input type="text" class="form-control" id="teacherId" placeholder="Masukkan ID Pengajar">
+        </div>
+
+        <!-- Lesson -->
+        <div class="mb-3">
+          <label for="lesson" class="form-label">Materi / Lesson</label>
+          <textarea class="form-control" id="lesson" rows="3" placeholder="Masukkan Materi / Lesson"></textarea>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="price" class="form-label">Harga (Rp)</label>
+          <input type="number" class="form-control" id="price" placeholder="Masukkan Harga Kursus">
+        </div>
+
           <button type="submit" class="btn btn-custom w-100">Simpan</button>`;
         } else if (type === 'peserta') {
             form.innerHTML = `
