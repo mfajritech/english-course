@@ -1,3 +1,38 @@
+<?php
+include 'config/database.php';
+
+$db = new Database();
+$conn = $db->conn;
+
+// Query untuk ambil semua data course
+$sql = "SELECT * FROM courses";
+$result = $conn->query($sql);
+
+// Inisialisasi array kosong
+$courses = [];
+
+// Jika ada hasil
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $courses[] = [
+            'id' => $row['id'],
+            'title' => $row['title'],
+            'slogan' => $row['slogan'],
+            'description' => $row['description'],
+            'duration' => $row['duration'],
+            'capacity' => $row['capacity'],
+            'mode' => $row['mode'],
+            'schedule' => $row['schedule'],
+            'teacher_id' => $row['teacher_id'],
+            'lesson' => $row['lesson']
+        ];
+    }
+} else {
+    $courses = [];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -52,30 +87,20 @@
     <div class="container text-center">
       <h2 class="fw-bold mb-4">Kelas Terpopuler</h2>
       <div class="row g-4">
+
+      <?php for($i = 0; $i <3; $i ++){ ?>
+
         <div class="col-md-4">
           <div class="card p-3">
             <img src="https://cdn-icons-png.flaticon.com/512/4762/4762316.png" class="mx-auto mb-3" width="100" alt="Beginner">
-            <h5 class="fw-bold">English for Beginner</h5>
-            <p>Pelajari dasar-dasar bahasa Inggris dari nol dengan metode fun learning.</p>
-            <a href="view/course_beginer.html" class="btn btn-orange w-100">Daftar Sekarang</a>
+            <h5 class="fw-bold"><?php echo $courses[$i]["title"] ?></h5>
+            <p class="course-slogan"><?php echo $courses[$i]["slogan"] ?></p>
+            <a href="view/course_detail.php?id=<?php echo $i + 1 ?>" class="btn btn-orange w-100">Daftar Sekarang</a>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card p-3">
-            <img src="https://cdn-icons-png.flaticon.com/512/4762/4762309.png" class="mx-auto mb-3" width="100" alt="Speaking">
-            <h5 class="fw-bold">Speaking Class</h5>
-            <p>Latih kemampuan berbicaramu bersama mentor dan native speaker.</p>
-            <a href="view/speaking_class.html" class="btn btn-orange w-100">Daftar Sekarang</a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card p-3">
-            <img src="https://cdn-icons-png.flaticon.com/512/4762/4762290.png" class="mx-auto mb-3" width="100" alt="TOEFL">
-            <h5 class="fw-bold">TOEFL Preparation</h5>
-            <p>Siapkan diri untuk tes TOEFL dengan materi dan latihan intensif.</p>
-            <a href="view/toelf _reparation.html" class="btn btn-orange w-100">Daftar Sekarang</a>
-          </div>
-        </div>
+
+        <?php } ?>
+
       </div>
     </div>
   </section>
