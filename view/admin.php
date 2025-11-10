@@ -1,3 +1,72 @@
+<?php
+include '../config/database.php';
+
+$db = new Database();
+$conn = $db->conn;
+
+// course
+$sql = "SELECT * FROM courses";
+$result = $conn->query($sql);
+$courses = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $courses[] = [
+            'id' => $row['id'],
+            'title' => $row['title'],
+            'slogan' => $row['slogan'],
+            'description' => $row['description'],
+            'duration' => $row['duration'],
+            'capacity' => $row['capacity'],
+            'mode' => $row['mode'],
+            'schedule' => $row['schedule'],
+            'teacher_id' => $row['teacher_id'],
+            'lesson' => $row['lesson']
+        ];
+    }
+} else {
+    $courses = [];
+}
+
+// course
+$sql = "SELECT * FROM users WHERE role='user'";
+$result = $conn->query($sql);
+$users = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $users[] = [
+            'id' => $row['id'],
+            'email' => $row['email'],
+            'phone' => $row['phone'],
+            'name' => $row['name'],
+            'birth' => $row['birth'],
+            'address' => $row['address'],
+            'role' => $row['role'],
+        ];
+    }
+} else {
+    $users = [];
+}
+
+// course
+$sql = "SELECT * FROM teachers";
+$result = $conn->query($sql);
+$teachers = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $teachers[] = [
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'title' => $row['title'],
+            'experience' => $row['experience'],
+            'education' => $row['education'],
+        ];
+    }
+} else {
+    $teachers = [];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -197,21 +266,21 @@
       <div class="col-md-4">
         <div class="info-card">
           <i class="bi bi-book text-warning fs-2 mb-2"></i>
-          <h3>${data.kursus.length}</h3>
+          <h3><?=count($courses)?></h3>
           <p>Total Kursus</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="info-card">
           <i class="bi bi-people text-success fs-2 mb-2"></i>
-          <h3>${data.peserta.length}</h3>
+          <h3><?=count($users)?></h3>
           <p>Total Peserta</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="info-card">
           <i class="bi bi-person-video3 text-primary fs-2 mb-2"></i>
-          <h3>${data.tutor.length}</h3>
+          <h3><?=count(value: $teachers)?></h3>
           <p>Total Tutor</p>
         </div>
       </div>
@@ -225,9 +294,11 @@
           <tr><th>#</th><th>Nama Kursus</th><th>Durasi</th></tr>
         </thead>
         <tbody>
-          ${data.kursus.slice(-5).map((k, i) => `
-            <tr><td>${i + 1}</td><td>${k.nama}</td><td>${k.durasi}</td></tr>
-          `).join('') || '<tr><td colspan="3" class="text-center text-muted">Belum ada data</td></tr>'}
+          <?php foreach($courses as $i => $course){ ?>
+         
+            <tr><td><?=$i+1?></td><td><?=$course['title']?></td><td><?=$course['duration']?> Bulan</td></tr>
+
+          <?php } ?>
         </tbody>
       </table>
     </div>
@@ -237,12 +308,14 @@
       <h5 class="fw-bold text-success mb-3"><i class="bi bi-people me-2"></i>5 Peserta Terbaru</h5>
       <table class="table table-hover align-middle mb-0">
         <thead class="table-success">
-          <tr><th>#</th><th>Nama Peserta</th><th>Kelas</th></tr>
+          <tr><th>#</th><th>Nama Peserta</th><th>Email</th></tr>
         </thead>
         <tbody>
-          ${data.peserta.slice(-5).map((p, i) => `
-            <tr><td>${i + 1}</td><td>${p.nama}</td><td>${p.kelas}</td></tr>
-          `).join('') || '<tr><td colspan="3" class="text-center text-muted">Belum ada data</td></tr>'}
+         <?php foreach($users as $i => $user){ ?>
+         
+            <tr><td><?=$i+1?></td><td><?=$user['name']?></td><td><?=$user['email']?></td></tr>
+
+          <?php } ?>
         </tbody>
       </table>
     </div>
@@ -255,6 +328,13 @@
           <tr><th>#</th><th>Nama Tutor</th><th>Pengalaman</th></tr>
         </thead>
         <tbody>
+
+          <?php foreach($users as $i => $user){ ?>
+         
+            <tr><td><?=$i+1?></td><td><?=$user['name']?></td><td><?=$user['email']?></td></tr>
+
+          <?php } ?>
+
           ${data.tutor.slice(-5).map((t, i) => `
             <tr><td>${i + 1}</td><td>${t.nama}</td><td>${t.pengalaman}</td></tr>
           `).join('') || '<tr><td colspan="3" class="text-center text-muted">Belum ada data</td></tr>'}
