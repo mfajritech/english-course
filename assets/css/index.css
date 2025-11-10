@@ -1,0 +1,39 @@
+  body {
+      background-color: #f5f8ff;
+      font-family: 'Poppins', sans-serif;
+    }
+    .navbar {
+      background-color: #0f4db7;
+    }
+    .navbar-brand span {
+      font-size: 0.8rem;
+      font-weight: normal;
+    }
+    .btn-orange {
+      background-color: orange;
+      color: #212529;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-orange:hover {
+      background-color: #ffb84d;
+    }
+    .hero {
+      background: linear-gradient(120deg, #0f4db7, #092d6f);
+      color: white;
+      padding: 6rem 0;
+    }
+    .card {
+      transition: 0.3s;
+      border: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+    footer {
+      background-color: #0f4db7;
+      color: white;
+      padding: 1.5rem 0;
+    }
