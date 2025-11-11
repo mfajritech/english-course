@@ -3,6 +3,14 @@ include '../../config/database.php';
 $db = new Database();
 $conn = $db->conn;
 
+session_start();
+
+// Jika user belum login, arahkan ke login page
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../auth/login.php");
+    exit;
+}
+
 // Ambil data ringkas
 $courses = $conn->query("SELECT * FROM courses ORDER BY id DESC LIMIT 5")->fetch_all(MYSQLI_ASSOC);
 $users = $conn->query("SELECT * FROM users WHERE role='user' ORDER BY id DESC LIMIT 5")->fetch_all(MYSQLI_ASSOC);
@@ -52,12 +60,13 @@ $totalTeachers = $conn->query("SELECT COUNT(*) AS total FROM teachers")->fetch_a
   <div class="sidebar">
     <div>
       <div class="brand">Adzkia Admin</div>
-      <nav class="nav flex-column px-2">
-        <a href="dashboard.php" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-        <a href="course.php" class="nav-link"><i class="bi bi-book me-2"></i>Course</a>
-        <a href="users.php" class="nav-link"><i class="bi bi-people me-2"></i>Users</a>
-        <a href="teachers.php" class="nav-link"><i class="bi bi-person-video3 me-2"></i>Teachers</a>
-        </nav>
+     <nav class="nav flex-column px-2">
+      <a href="dashboard.php" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+      <a href="course.php" class="nav-link"><i class="bi bi-book me-2"></i>Course</a>
+      <a href="users.php" class="nav-link"><i class="bi bi-people me-2"></i>Users</a>
+      <a href="teachers.php" class="nav-link"><i class="bi bi-person-video3 me-2"></i>Teachers</a>
+      <a href="enrollment.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>Enrollment</a>
+    </nav>
     </div>
     <div class="text-center mb-3">
       <a href="../auth/logout.php" class="text-light text-decoration-none"><i class="bi bi-box-arrow-right me-1"></i>Keluar</a>

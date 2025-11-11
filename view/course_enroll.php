@@ -22,18 +22,27 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
+
 // Jika form dikirim
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_SESSION['user_id'])) {
-        echo "<script>alert('Kamu harus login dulu!'); window.location='../auth/login.php';</script>";
-        exit;
+  if (!isset($_SESSION['user_id'])) {
+    echo "<script>alert('Kamu harus login dulu!'); window.location='../auth/login.php';</script>";
+    exit;
+  }
+
+    $enrollQuery = $conn->query("SELECT * FROM enrollments WHERE user_id=$user_id AND course_id=$course_id");
+    $course = $enrollQuery->fetch_assoc();
+    
+    if($course){
+        echo "<script>alert('GAGAL: Anda telah mengambil kelas ini!'); window.location='/view/user/course.php';</script>";
     }
-
-    $stmt = $conn->prepare("INSERT INTO enrollments (user_id, course_id, status) VALUES (?, ?, 'menunggu konfirmasi')");
-    $stmt->bind_param("ii", $user_id, $course_id);
-    $stmt->execute();
-
-    echo "<script>alert('Pendaftaran berhasil dikirim! Menunggu konfirmasi admin.'); window.location='my_courses.php';</script>";
+    else{
+      $stmt = $conn->prepare("INSERT INTO enrollments (user_id, course_id, status) VALUES (?, ?, 'menunggu konfirmasi')");
+      $stmt->bind_param("ii", $user_id, $course_id);
+      $stmt->execute();
+      
+      echo "<script>alert('Pendaftaran berhasil dikirim! Menunggu konfirmasi admin.'); window.location='/view/user/course.php';</script>";
+    }
      
 }
 ?>
@@ -70,6 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container py-5">
   <?php if ($course): ?>
   <div class="enroll-card p-4">
+    <?php if(isset($message)){?>
+      <div class="bg-danger">
+        <h1 class="text-dark text-center"><?=$message?></h1>
+      </div>
+    <?php }?>
     <div class="row g-4 align-items-start">
       
       <!-- KIRI: Detail Course -->

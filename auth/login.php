@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // redirect ke dashboard
             if ($user['role'] === 'admin') {
-                header("Location: ../admin/dashboard.php");
+                header("Location: ../view/admin/dashboard.php");
             } else {
-                header("Location: ../user/dashboard.php");
+                header("Location: ../view/user/dashboard.php");
             }
             exit;
         } else {
@@ -76,14 +76,6 @@ $conn->close();
         <div class="form-floating mb-3">
           <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
           <label for="floatingPassword">Kata Sandi</label>
-        </div>
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="rememberMe">
-            <label class="form-check-label small" for="rememberMe">Ingat saya</label>
-          </div>
-          <a href="#" class="text-decoration-none small text-primary">Lupa password?</a>
         </div>
 
         <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Masuk</button>
