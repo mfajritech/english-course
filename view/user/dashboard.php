@@ -2,7 +2,6 @@
 session_start();
 include '../../config/database.php';
 
-session_start();
 
 // Jika user belum login, arahkan ke login page
 if (!isset($_SESSION['user_id'])) {

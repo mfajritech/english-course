@@ -5,8 +5,6 @@ include '../../config/database.php';
 $db = new Database();
 $conn = $db->conn;
 
-session_start();
-
 // Jika user belum login, arahkan ke login page
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../auth/login.php");

@@ -1,6 +1,11 @@
 <?php
 include '../config/database.php';
 session_start();
+// Jika user belum login, arahkan ke login page
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../auth/login.php");
+    exit;
+}
 
 $db = new Database();
 $conn = $db->conn;

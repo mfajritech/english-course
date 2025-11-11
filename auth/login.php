@@ -6,6 +6,15 @@ $db = new Database();
 $conn = $db->conn;
 
 $message = '';
+if (isset($_SESSION['user_id'])) {
+  if($_SESSION['user_role'] == 'admin'){
+    header("Location: ../view/admin/dashboard.php");
+    exit;
+  }else{
+    header("Location: ../view/user/dashboard.php");
+    exit;
+  }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -83,6 +92,8 @@ $conn->close();
         <p class="text-center mt-3 mb-0" style="font-size: 14px;">
           Belum punya akun?
           <a href="register.php" class="text-decoration-none fw-bold text-primary">Daftar</a>
+          | 
+          <a href="../index.php" class="text-decoration-none fw-bold text-primary">Home</a>
         </p>
       </form>
     </div>

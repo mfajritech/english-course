@@ -97,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="text-center mt-3 mb-0" style="font-size: 14px;">
           Sudah punya akun?
           <a href="login.php" class="text-decoration-none fw-bold text-primary">Login</a>
+          | 
+          <a href="../index.php" class="text-decoration-none fw-bold text-primary">Home</a>
         </p>
       </form>
     </div>
