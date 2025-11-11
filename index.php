@@ -38,6 +38,7 @@ $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,6 +48,7 @@ $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
   <link rel="stylesheet" href="assets/css/index.css">
 
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -86,24 +88,26 @@ $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
     </div>
   </section>
 
-  <!-- Course Section -->
-  <section class="py-5">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">Kelas Terpopuler</h2>
-      <div class="row g-4">
+    <!-- Course Section -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Kelas Terpopuler</h2>
+            <div class="row g-4">
 
-      <?php for($i = 0; $i <3; $i ++){ ?>
+                <?php for($i = 0; $i <3; $i ++){ ?>
 
-        <div class="col-md-4">
-          <div class="card p-3">
-            <img src="https://cdn-icons-png.flaticon.com/512/4762/4762316.png" class="mx-auto mb-3" width="100" alt="Beginner">
-            <h5 class="fw-bold"><?php echo $courses[$i]["title"] ?></h5>
-            <p class="course-slogan"><?php echo $courses[$i]["slogan"] ?></p>
-            <a href="view/course_detail.php?id=<?php echo $i + 1 ?>" class="btn btn-orange w-100">Daftar Sekarang</a>
-          </div>
-        </div>
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4762/4762316.png" class="mx-auto mb-3"
+                            width="100" alt="Beginner">
+                        <h5 class="fw-bold"><?php echo $courses[$i]["title"] ?></h5>
+                        <p class="course-slogan"><?php echo $courses[$i]["slogan"] ?></p>
+                        <a href="view/course_detail.php?id=<?php echo $i + 1 ?>" class="btn btn-orange w-100">Daftar
+                            Sekarang</a>
+                    </div>
+                </div>
 
-        <?php } ?>
+                <?php } ?>
 
       </div>
     </div>
@@ -159,11 +163,12 @@ $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
       </div>
     </div>
 
-  <footer class="text-center">
-    <p class="mb-0">&copy; 2025 Adzkia English Academy</p>
-  </footer>
+    <footer class="text-center">
+        <p class="mb-0">&copy; 2025 Adzkia English Academy</p>
+    </footer>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
