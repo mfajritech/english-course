@@ -90,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="users.php" class="nav-link"><i class="bi bi-people me-2"></i>Users</a>
       <a href="teachers.php" class="nav-link"><i class="bi bi-person-video3 me-2"></i>Teachers</a>
       <a href="enrollment.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>Enrollment</a>
+      <a href="news.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>News</a>
     </nav>
   </div>
   <div class="text-center mb-3">

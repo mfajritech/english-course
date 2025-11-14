@@ -4,9 +4,15 @@ include 'config/database.php';
 $db = new Database();
 $conn = $db->conn;
 
-$courseQuery = $conn->query("SELECT * FROM courses");
-$courses = $courseQuery->fetch_all(MYSQLI_ASSOC);
+$sql = "SELECT * FROM news ORDER BY id ASC LIMIT 4";
+$result = $conn->query($sql);
 
+$news = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $news[] = $row;
+    }
+}
 
 ?>
 
@@ -46,21 +52,19 @@ $courses = $courseQuery->fetch_all(MYSQLI_ASSOC);
     </div>
   </nav>
 
-<div style="min-height: 75vh;">
-    <div class="row g-4 my-5 mx-0">
-        <?php foreach ($courses as $course): ?>
-            <div class="col-md-6 col-lg-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                <img src="https://cdn-icons-png.flaticon.com/512/4762/4762316.png" class="mx-auto mb-3" width="100" alt="Beginner">
-                <h5 class="fw-bold"><?php echo $course["title"] ?></h5>
-                <p class="course-slogan"><?php echo $course["slogan"] ?></p>
-                <a href="/view/course_detail.php?id=<?php echo $course['id'] ?>" class="text-decoration-none text-dark py-1 px-3 fw-bold rounded-2" style="background-color: orange !important;">Daftar Sekarang</a>
-                </div>
-            </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
+<div style="min-height: 80vh;" class="py-4">
+<h3 class="fw-bold text-primary text-center">- Berita -</h3>
+  <div class="row m-0 p-3">
+    <?php foreach($news as $n):?>
+      <div class="col-6">
+        <a href="/view/news.php?id= <?=$n['id'] ?>" class="card p-3 m-1 text-decoration-none">
+          <h5 class="" style="color: orange;"><?=$n['title']?></h5>
+          <p class="text-secondary mb-0" style="font-size: .8em;"><?=$n['date']?></p>
+          <p class="course-slogan mb-0"><?=$n['content']?></p>
+        </a>
+      </div>
+    <?php endforeach?>
+  </div>
   </div>
 
   <footer class="text-center">

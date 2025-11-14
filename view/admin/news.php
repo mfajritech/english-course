@@ -12,14 +12,14 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Ambil semua user dengan role 'user'
-$sql = "SELECT * FROM users WHERE role='user' ORDER BY id DESC";
+// Ambil semua news dari database
+$sql = "SELECT * FROM news ORDER BY id ASC";
 $result = $conn->query($sql);
 
-$users = [];
+$news = [];
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $users[] = $row;
+        $news[] = $row;
     }
 }
 ?>
@@ -29,7 +29,7 @@ if ($result && $result->num_rows > 0) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manajemen Peserta | Adzkia Admin</title>
+  <title>Data Pengajar | Adzkia Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
@@ -45,6 +45,12 @@ if ($result && $result->num_rows > 0) {
     .sidebar .brand {
       font-size: 1.3rem; font-weight: bold; text-align: center;
       padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     .sidebar .nav-link {
       color: #fff; font-weight: 500; padding: 12px 20px;
@@ -72,13 +78,13 @@ if ($result && $result->num_rows > 0) {
  <div class="sidebar">
     <div>
       <div class="brand">Adzkia Admin</div>
-       <nav class="nav flex-column px-2">
+      <nav class="nav flex-column px-2">
       <a href="dashboard.php" class="nav-link"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       <a href="course.php" class="nav-link"><i class="bi bi-book me-2"></i>Course</a>
-      <a href="users.php" class="nav-link active"><i class="bi bi-people me-2"></i>Users</a>
+      <a href="users.php" class="nav-link"><i class="bi bi-people me-2"></i>Users</a>
       <a href="teachers.php" class="nav-link"><i class="bi bi-person-video3 me-2"></i>Teachers</a>
       <a href="enrollment.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>Enrollment</a>
-      <a href="news.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>News</a>
+      <a href="news.php" class="nav-link active"><i class="bi bi-card-checklist me-2"></i>News</a>
     </nav>
     </div>
     <div class="text-center mb-3">
@@ -89,42 +95,28 @@ if ($result && $result->num_rows > 0) {
 <!-- Konten -->
 <main>
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold text-primary">Manajemen Users</h3>
+    <h3 class="fw-bold text-primary">Berita</h3>
+    <a href="add_news.php" class="btn btn-custom"><i class="bi bi-plus-circle me-2"></i>Tambah Berita</a>
   </div>
 
-  <div class="card p-3 shadow-sm">
-    <table class="table table-hover align-middle">
-      <thead class="table-primary">
-        <tr>
-          <th>#</th>
-          <th>Nama</th>
-          <th>Email</th>
-          <th>No. HP</th>
-          <th>Alamat</th>
-          <th>Tanggal Lahir</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php if (count($users) > 0): ?>
-          <?php foreach ($users as $i => $u): ?>
-            <tr>
-              <td><?= $i + 1 ?></td>
-              <td><?= htmlspecialchars($u['name']) ?></td>
-              <td><?= htmlspecialchars($u['email']) ?></td>
-              <td><?= htmlspecialchars($u['phone']) ?></td>
-              <td><?= htmlspecialchars($u['address']) ?></td>
-              <td><?= htmlspecialchars($u['birth']) ?></td>
-              <td>
-                <a href="user_detail.php?id=<?= $u['id'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-search"></i></a>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <tr><td colspan="7" class="text-center text-muted">Belum ada data user</td></tr>
-        <?php endif; ?>
-      </tbody>
-    </table>
+  <div class="row g-4">
+    <?php if (count($news) > 0): ?>
+      <?php foreach ($news as $t): ?>
+        <div class="col-md-6 col-lg-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+                <a href="news_detail.php?id=<?= $t['id'] ?>" class="text-decoration-none text-dark">
+                    <h5 class="fw-bold"><?= htmlspecialchars($t['title']) ?></h5>
+                    <p class="text-muted mb-1 text-secondary"><?= htmlspecialchars($t['date']) ?></p>
+                    <p class="small mb-1 clamp-2 text-secondary"></i><?= htmlspecialchars($t['content']) ?></p>
+                </a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p class="text-center text-muted">Belum ada berita</p>
+    <?php endif; ?>
   </div>
 </main>
 

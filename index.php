@@ -33,6 +33,17 @@ if ($result && $result->num_rows > 0) {
 $teacherQuery = $conn->query("SELECT * FROM teachers LIMIT 4");
 $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
 
+// Ambil semua news dari database
+$sql = "SELECT * FROM news ORDER BY id ASC LIMIT 4";
+$result = $conn->query($sql);
+
+$news = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $news[] = $row;
+    }
+}
+
 
 ?>
 
@@ -64,6 +75,7 @@ $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
         <ul class="navbar-nav align-items-lg-center">
           <li class="nav-item"><a class="nav-link text-light px-3" href="index.php">Beranda</a></li>
           <li class="nav-item"><a class="nav-link text-light px-3" href="courses.php">Kelas</a></li>
+          <li class="nav-item"><a class="nav-link text-light px-3" href="news.php">Berita</a></li>
           <li class="nav-item"><a class="nav-link text-light px-3" href="#">Tentang</a></li>
           <li class="nav-item ms-lg-3">
             <a href="/auth/login.php" class="btn btn-orange rounded-pill px-3">Masuk</a>
@@ -149,6 +161,19 @@ $teachers = $teacherQuery->fetch_all(MYSQLI_ASSOC);
         </ul>
       </div>
     </div>
+  </div>
+
+  <h3 class="fw-bold text-primary text-center">- Berita -</h3>
+  <div class="row m-0 p-3">
+    <?php foreach($news as $n):?>
+      <div class="col-6">
+        <a href="/view/news.php?id= <?=$n['id'] ?>" class="card p-3 m-1 text-decoration-none">
+          <h5 class="" style="color: orange;"><?=$n['title']?></h5>
+          <p class="text-secondary mb-0" style="font-size: .8em;"><?=$n['date']?></p>
+          <p class="course-slogan mb-0"><?=$n['content']?></p>
+        </a>
+      </div>
+    <?php endforeach?>
   </div>
 
     <div class="row m-0" style="background-color: lightgray;">

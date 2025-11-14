@@ -14,26 +14,26 @@ if (!isset($_SESSION['user_id'])) {
 
 // Proses form submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name']);
     $title = trim($_POST['title']);
-    $experience = trim($_POST['experience']);
-    $education = trim($_POST['education']);
+    $content = trim($_POST['content']);
 
-    if (!empty($name) && !empty($title)) {
-        $stmt = $conn->prepare("INSERT INTO teachers (name, title, experience, education) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $name, $title, $experience, $education);
+    if (!empty($title) && !empty($content)) {
+
+        $stmt = $conn->prepare("INSERT INTO news (title, date, content) VALUES (?, NOW(), ?)");
+        $stmt->bind_param("ss", $title, $content);
 
         if ($stmt->execute()) {
-            header("Location: teachers.php?success=1");
+            header("Location: news.php?success=1");
             exit;
         } else {
-            $error = "Gagal menyimpan data. Silakan coba lagi.";
+            $error = "Gagal menyimpan berita. Silakan coba lagi.";
         }
     } else {
-        $error = "Nama dan title wajib diisi.";
+        $error = "Judul dan konten wajib diisi.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -98,9 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="dashboard.php" class="nav-link"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
       <a href="course.php" class="nav-link"><i class="bi bi-book me-2"></i>Course</a>
       <a href="users.php" class="nav-link"><i class="bi bi-people me-2"></i>Users</a>
-      <a href="teachers.php" class="nav-link active"><i class="bi bi-person-video3 me-2"></i>Teachers</a>
+      <a href="teachers.php" class="nav-link"><i class="bi bi-person-video3 me-2"></i>Teachers</a>
       <a href="enrollment.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>Enrollment</a>
-      <a href="news.php" class="nav-link"><i class="bi bi-card-checklist me-2"></i>News</a>
+      <a href="news.php" class="nav-link active"><i class="bi bi-card-checklist me-2"></i>News</a>
     </nav>
   </div>
   <div class="text-center mb-3">
@@ -111,12 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Konten -->
 <main>
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold text-primary">Tambah Guru</h3>
-    <a href="teachers.php" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> Kembali</a>
+    <h3 class="fw-bold text-primary">Tambah Berita</h3>
+    <a href="news.php" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i> Kembali</a>
   </div>
 
   <div class="card shadow-sm p-4">
-    <h5 class="fw-bold text-primary mb-3">Form Tambah Guru</h5>
+    <h5 class="fw-bold text-primary mb-3">Form Tambah Berita</h5>
 
     <?php if (isset($error)): ?>
       <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -124,23 +124,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form method="POST">
       <div class="mb-3">
-        <label class="form-label fw-semibold">Nama Lengkap</label>
-        <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required>
+        <label class="form-label fw-semibold">Judul</label>
+        <input type="text" name="title" class="form-control" placeholder="Judul" required>
       </div>
 
       <div class="mb-3">
-        <label class="form-label fw-semibold">Title</label>
-        <input type="text" name="title" class="form-control" placeholder="Contoh: TOEFL & IELTS Specialist" required>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Pengalaman</label>
-        <input type="text" name="experience" class="form-control" rows="3" placeholder="Contoh: 8 Tahun Mengajar " required>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Pendidikan</label>
-        <input type="text" name="education" class="form-control" rows="2" placeholder="Masukkan riwayat pendidikan terakhir">
+        <label class="form-label fw-semibold">Konten</label>
+        <textarea class="d-block w-100" rows="8" name="content" id="content"></textarea>
       </div>
 
       <button type="submit" class="btn btn-custom px-4"><i class="bi bi-save me-2"></i>Simpan</button>
