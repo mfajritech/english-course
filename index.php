@@ -51,54 +51,56 @@ if ($result && $result->num_rows > 0) {
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adzkia English Academy</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adzkia English Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/index.css">
 
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.php">
-        Adzkia <span>English Academy</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center">
-          <li class="nav-item"><a class="nav-link text-light px-3" href="index.php">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link text-light px-3" href="courses.php">Kelas</a></li>
-          <li class="nav-item"><a class="nav-link text-light px-3" href="news.php">Berita</a></li>
-          <li class="nav-item"><a class="nav-link text-light px-3" href="#">Tentang</a></li>
-          <li class="nav-item ms-lg-3">
-            <a href="/auth/login.php" class="btn btn-orange rounded-pill px-3">Masuk</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.php">
+                Adzkia <span>English Academy</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link text-light px-3" href="index.php">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link text-light px-3" href="courses.php">Kelas</a></li>
+                    <li class="nav-item"><a class="nav-link text-light px-3" href="news.php">Berita</a></li>
+                    <li class="nav-item"><a class="nav-link text-light px-3" href="about.php">Tentang</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="/auth/login.php" class="btn btn-orange rounded-pill px-3">Masuk</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Hero Section -->
-  <section class="hero text-center text-lg-start">
-    <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between">
-      <div class="col-lg-6">
-        <h1 class="fw-bold display-5 mb-3">Belajar Bahasa Inggris dengan Cara yang Seru dan Efektif</h1>
-        <p class="lead mb-4">Tingkatkan kemampuan speaking, listening, dan grammar kamu bersama mentor profesional. 
-        Nikmati pengalaman belajar online interaktif dari mana saja.</p>
-        <a href="/auth/login.php" class="btn btn-orange rounded-pill px-4 py-2">Mulai Belajar</a>
-      </div>
-      <div class="col-lg-5 mt-5 mt-lg-0 text-center">
-        <img src="https://cdn-icons-png.flaticon.com/512/201/201818.png" class="img-fluid" width="350" alt="Online Class">
-      </div>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero text-center text-lg-start">
+        <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between">
+            <div class="col-lg-6">
+                <h1 class="fw-bold display-5 mb-3">Belajar Bahasa Inggris dengan Cara yang Seru dan Efektif</h1>
+                <p class="lead mb-4">Tingkatkan kemampuan speaking, listening, dan grammar kamu bersama mentor
+                    profesional.
+                    Nikmati pengalaman belajar online interaktif dari mana saja.</p>
+                <a href="/auth/login.php" class="btn btn-orange rounded-pill px-4 py-2">Mulai Belajar</a>
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0 text-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/201/201818.png" class="img-fluid" width="350"
+                    alt="Online Class">
+            </div>
+        </div>
+    </section>
 
     <!-- Course Section -->
     <section class="py-5">
@@ -121,71 +123,78 @@ if ($result && $result->num_rows > 0) {
 
                 <?php } ?>
 
-      </div>
-    </div>
-  </section>
-  
-   <div class=" py-4" style="background-color: lightgray;">
-    <h3 class="text-center fw-bold" style="color: black;">Diajar Langsung Oleh Profesional</h3>
-    <div class="row m-0 p-3">
-
-    <?php foreach($teachers as $teacher):?>
-      <div class="col-3">
-        <div class="card p-2 bg-dark">
-          <p class="fw-bold fs-5 mb-0" style="color: orange;"><?=$teacher['name']?></p>
-          <p class="mb-0 text-light"><?=$teacher['title']?></p>
-          <p class="text-secondary mb-0"><?=$teacher['education']?></p>
+            </div>
         </div>
-      </div>
-    <?php endforeach?>
+    </section>
 
+    <div class=" py-4" style="background-color: lightgray;">
+        <h3 class="text-center fw-bold" style="color: black;">Diajar Langsung Oleh Profesional</h3>
+        <div class="row m-0 p-3">
+
+            <?php foreach($teachers as $teacher):?>
+            <div class="col-3">
+                <div class="card p-2 bg-dark">
+                    <p class="fw-bold fs-5 mb-0" style="color: orange;"><?=$teacher['name']?></p>
+                    <p class="mb-0 text-light"><?=$teacher['title']?></p>
+                    <p class="text-secondary mb-0"><?=$teacher['education']?></p>
+                </div>
+            </div>
+            <?php endforeach?>
+
+        </div>
     </div>
-  </div>
 
-  <div class="row m-0 py-5">
-    <div class="col-4 d-flex justify-content-center align-items-center">
-        <h1 class="d-inline-block fw-bold">Adzkia<span class="fs-6 fw-normal">english academy</span>
-        </h1>
+    <div class="row m-0 py-5">
+        <div class="col-4 d-flex justify-content-center align-items-center">
+            <h1 class="d-inline-block fw-bold">Adzkia<span class="fs-6 fw-normal">english academy</span>
+            </h1>
+        </div>
+        <div class="col-lg-8">
+            <h3 class="fw-bold mb-3">Apa keunggulan Adzkia English Academy?</h3>
+            <div class="card p-3 mb-3">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Berpengalaman lebih
+                        dari 10 tahun</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Harga murah mulai
+                        dari 499k</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Dibimbing oleh guru
+                        profesional</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Pembelajaran
+                        interaktif dan menyenangkan</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Terdapat kelas
+                        luring dan daring</li>
+
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-8">
-      <h3 class="fw-bold mb-3">Apa keunggulan Adzkia English Academy?</h3>
-      <div class="card p-3 mb-3">
-        <ul class="list-group list-group-flush">
 
-              <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Berpengalaman lebih dari 10 tahun</li>
-              <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Harga murah mulai dari 499k</li>
-              <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Dibimbing oleh guru profesional</li>
-              <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Pembelajaran interaktif dan menyenangkan</li>
-              <li class="list-group-item"><i class="bi bi-check-circle text-success me-2"></i>Terdapat kelas luring dan daring</li>
-
-        </ul>
-      </div>
+    <h3 class="fw-bold text-primary text-center">- Berita -</h3>
+    <div class="row m-0 p-3">
+        <?php foreach($news as $n):?>
+        <div class="col-6">
+            <a href="/view/news.php?id= <?=$n['id'] ?>" class="card p-3 m-1 text-decoration-none">
+                <h5 class="" style="color: orange;"><?=$n['title']?></h5>
+                <p class="text-secondary mb-0" style="font-size: .8em;"><?=$n['date']?></p>
+                <p class="course-slogan mb-0"><?=$n['content']?></p>
+            </a>
+        </div>
+        <?php endforeach?>
     </div>
-  </div>
-
-  <h3 class="fw-bold text-primary text-center">- Berita -</h3>
-  <div class="row m-0 p-3">
-    <?php foreach($news as $n):?>
-      <div class="col-6">
-        <a href="/view/news.php?id= <?=$n['id'] ?>" class="card p-3 m-1 text-decoration-none">
-          <h5 class="" style="color: orange;"><?=$n['title']?></h5>
-          <p class="text-secondary mb-0" style="font-size: .8em;"><?=$n['date']?></p>
-          <p class="course-slogan mb-0"><?=$n['content']?></p>
-        </a>
-      </div>
-    <?php endforeach?>
-  </div>
 
     <div class="row m-0" style="background-color: lightgray;">
-      <div class="col-3 d-flex justify-content-center align-items-center">
-        <img src="/assets/images/teacher.png" alt="" width="300px">
-      </div>
-      <div class="col-9 d-flex justify-content-center align-items-center">
-        <div>
-          <h1 class="fw-bold pb-3">Ayo Tingkatkan Skill Berbahasa Inggris Kamu Bersama Adzkia English Academy</h1>
-          <a href="/auth/register.php" class="text-decoration-none fw-bold py-2 px-3 rounded-pill bg-warning text-dark">Daftar Sekarang!</a>
+        <div class="col-3 d-flex justify-content-center align-items-center">
+            <img src="/assets/images/teacher.png" alt="" width="300px">
         </div>
-      </div>
+        <div class="col-9 d-flex justify-content-center align-items-center">
+            <div>
+                <h1 class="fw-bold pb-3">Ayo Tingkatkan Skill Berbahasa Inggris Kamu Bersama Adzkia English Academy</h1>
+                <a href="/auth/register.php"
+                    class="text-decoration-none fw-bold py-2 px-3 rounded-pill bg-warning text-dark">Daftar
+                    Sekarang!</a>
+            </div>
+        </div>
     </div>
 
     <footer class="text-center">
